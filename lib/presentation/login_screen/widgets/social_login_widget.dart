@@ -28,11 +28,9 @@ class SocialLoginWidget extends StatelessWidget {
             icon: Container(
               width: 24,
               height: 24,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-              ),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
               child: Image.network(
-                'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=24&h=24&fit=crop',
+                'https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg',
                 width: 24,
                 height: 24,
                 errorBuilder: (context, error, stackTrace) {
@@ -62,10 +60,7 @@ class SocialLoginWidget extends StatelessWidget {
             ),
             style: OutlinedButton.styleFrom(
               backgroundColor: Colors.white,
-              side: BorderSide(
-                color: AppTheme.borderLight,
-                width: 1.5,
-              ),
+              side: BorderSide(color: AppTheme.borderLight, width: 1.5),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12.0),
               ),
@@ -82,14 +77,10 @@ class SocialLoginWidget extends StatelessWidget {
             Expanded(
               child: OutlinedButton.icon(
                 onPressed: isLoading ? null : () => onSocialLogin('apple'),
-                icon: Container(
+                icon: SizedBox(
                   width: 20,
                   height: 20,
-                  child: const Icon(
-                    Icons.apple,
-                    size: 20,
-                    color: Colors.black,
-                  ),
+                  child: const Icon(Icons.apple, size: 20, color: Colors.black),
                 ),
                 label: Text(
                   'Apple',
@@ -101,15 +92,14 @@ class SocialLoginWidget extends StatelessWidget {
                 ),
                 style: OutlinedButton.styleFrom(
                   backgroundColor: Colors.white,
-                  side: BorderSide(
-                    color: AppTheme.borderLight,
-                    width: 1.5,
-                  ),
+                  side: BorderSide(color: AppTheme.borderLight, width: 1.5),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.0),
                   ),
-                  padding:
-                      EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 16.0,
+                    horizontal: 12.0,
+                  ),
                 ),
               ),
             ),
@@ -143,15 +133,14 @@ class SocialLoginWidget extends StatelessWidget {
                 ),
                 style: OutlinedButton.styleFrom(
                   backgroundColor: Colors.white,
-                  side: BorderSide(
-                    color: AppTheme.borderLight,
-                    width: 1.5,
-                  ),
+                  side: BorderSide(color: AppTheme.borderLight, width: 1.5),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.0),
                   ),
-                  padding:
-                      EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 16.0,
+                    horizontal: 12.0,
+                  ),
                 ),
               ),
             ),
@@ -174,11 +163,7 @@ class SocialLoginWidget extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Icon(
-                Icons.fingerprint,
-                color: AppTheme.primaryLight,
-                size: 24,
-              ),
+              Icon(Icons.fingerprint, color: AppTheme.primaryLight, size: 24),
               SizedBox(width: 3.w),
               Expanded(
                 child: Column(

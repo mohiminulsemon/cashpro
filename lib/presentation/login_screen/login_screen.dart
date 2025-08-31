@@ -29,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
     // Pre-fill with demo credentials
-    _emailController.text = 'demo@cashbook.com';
+    _emailController.text = 'demo@cashpro.com';
     _passwordController.text = 'demo123';
   }
 

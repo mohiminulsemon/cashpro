@@ -19,7 +19,6 @@ class _SplashScreenState extends State<SplashScreen>
   late Animation<double> _scaleAnimation;
   late Animation<double> _fadeAnimation;
 
-  bool _isLoading = true;
   String _loadingText = 'Initializing...';
   double _loadingProgress = 0.0;
 
@@ -41,21 +40,13 @@ class _SplashScreenState extends State<SplashScreen>
       vsync: this,
     );
 
-    _scaleAnimation = Tween<double>(
-      begin: 0.5,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _scaleController,
-      curve: Curves.elasticOut,
-    ));
+    _scaleAnimation = Tween<double>(begin: 0.5, end: 1.0).animate(
+      CurvedAnimation(parent: _scaleController, curve: Curves.elasticOut),
+    );
 
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _fadeController,
-      curve: Curves.easeInOut,
-    ));
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _fadeController, curve: Curves.easeInOut),
+    );
 
     _scaleController.forward();
     _fadeController.forward();
@@ -162,7 +153,7 @@ class _SplashScreenState extends State<SplashScreen>
                       FadeTransition(
                         opacity: _fadeAnimation,
                         child: Text(
-                          'CashBook',
+                          'CashPro',
                           style: GoogleFonts.inter(
                             fontSize: 32.0,
                             fontWeight: FontWeight.w700,

@@ -12,7 +12,6 @@ import '../presentation/onboarding_flow/onboarding_flow.dart';
 
 class AppRoutes {
   static const String initial = '/splash-screen';
-  static const String splashScreen = '/splash-screen';
   static const String loginScreen = '/login-screen';
   static const String registrationScreen = '/registration-screen';
   static const String onboardingFlow = '/onboarding-flow';
@@ -25,7 +24,6 @@ class AppRoutes {
 
   static Map<String, WidgetBuilder> routes = {
     initial: (context) => const SplashScreen(),
-    splashScreen: (context) => const SplashScreen(),
     loginScreen: (context) => const LoginScreen(),
     registrationScreen: (context) => const RegistrationScreen(),
     onboardingFlow: (context) => const OnboardingFlow(),
