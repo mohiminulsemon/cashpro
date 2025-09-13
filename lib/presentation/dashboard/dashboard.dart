@@ -20,7 +20,7 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
   bool _isPrivacyMode = false;
   String _currentAccount = 'Personal';
-  bool _isRefreshing = false;
+  bool isRefreshing = false;
   bool _isOffline = false;
   DateTime _lastUpdate = DateTime.now();
 
@@ -84,18 +84,23 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
   double get _todayExpenses {
     final today = DateTime.now();
     return _mockTransactions
-        .where((t) =>
-            t['type'] == 'expense' && _isSameDay(t['date'] as DateTime, today))
+        .where(
+          (t) =>
+              t['type'] == 'expense' &&
+              _isSameDay(t['date'] as DateTime, today),
+        )
         .fold(0.0, (sum, t) => sum + (t['amount'] as num).toDouble());
   }
 
   double get _monthlyIncome {
     final now = DateTime.now();
     return _mockTransactions
-        .where((t) =>
-            t['type'] == 'income' &&
-            (t['date'] as DateTime).month == now.month &&
-            (t['date'] as DateTime).year == now.year)
+        .where(
+          (t) =>
+              t['type'] == 'income' &&
+              (t['date'] as DateTime).month == now.month &&
+              (t['date'] as DateTime).year == now.year,
+        )
         .fold(0.0, (sum, t) => sum + (t['amount'] as num).toDouble());
   }
 
@@ -186,7 +191,8 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
                                       '\$${_todayExpenses.toStringAsFixed(2)}',
                                   iconName: 'trending_down',
                                   iconColor: AppTheme.getErrorColor(
-                                      theme.brightness == Brightness.light),
+                                    theme.brightness == Brightness.light,
+                                  ),
                                   backgroundColor: colorScheme.surface,
                                   onTap: () =>
                                       _showMetricDetails('Today\'s Expenses'),
@@ -199,7 +205,8 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
                                       '\$${_monthlyIncome.toStringAsFixed(2)}',
                                   iconName: 'trending_up',
                                   iconColor: AppTheme.getSuccessColor(
-                                      theme.brightness == Brightness.light),
+                                    theme.brightness == Brightness.light,
+                                  ),
                                   backgroundColor: colorScheme.surface,
                                   onTap: () =>
                                       _showMetricDetails('Monthly Income'),
@@ -212,7 +219,8 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
                                       '\$${_pendingCredits.toStringAsFixed(2)}',
                                   iconName: 'schedule',
                                   iconColor: AppTheme.getWarningColor(
-                                      theme.brightness == Brightness.light),
+                                    theme.brightness == Brightness.light,
+                                  ),
                                   backgroundColor: colorScheme.surface,
                                   onTap: () =>
                                       _showMetricDetails('Pending Credits'),
@@ -246,7 +254,9 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
                               ),
                               GestureDetector(
                                 onTap: () => Navigator.pushNamed(
-                                    context, '/transaction-history'),
+                                  context,
+                                  '/transaction-history',
+                                ),
                                 child: Text(
                                   'View All',
                                   style: theme.textTheme.bodyMedium?.copyWith(
@@ -284,11 +294,7 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
             ),
       floatingActionButton: FloatingActionButton(
         onPressed: _showQuickAddSheet,
-        child: CustomIconWidget(
-          iconName: 'add',
-          color: Colors.white,
-          size: 28,
-        ),
+        child: CustomIconWidget(iconName: 'add', color: Colors.white, size: 28),
       ),
       bottomNavigationBar: CustomBottomBar.main(
         currentIndex: currentIndex,
@@ -315,19 +321,20 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
 
   Widget _buildOfflineIndicator() {
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
 
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
-      color: AppTheme.getWarningColor(theme.brightness == Brightness.light)
-          .withValues(alpha: 0.1),
+      color: AppTheme.getWarningColor(
+        theme.brightness == Brightness.light,
+      ).withValues(alpha: 0.1),
       child: Row(
         children: [
           CustomIconWidget(
             iconName: 'cloud_off',
-            color:
-                AppTheme.getWarningColor(theme.brightness == Brightness.light),
+            color: AppTheme.getWarningColor(
+              theme.brightness == Brightness.light,
+            ),
             size: 16,
           ),
           SizedBox(width: 2.w),
@@ -336,7 +343,8 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
               'Offline mode • Last sync: ${_formatLastUpdate()}',
               style: theme.textTheme.bodySmall?.copyWith(
                 color: AppTheme.getWarningColor(
-                    theme.brightness == Brightness.light),
+                  theme.brightness == Brightness.light,
+                ),
                 fontSize: 11.sp,
               ),
             ),
@@ -362,13 +370,13 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
   }
 
   Future<void> _refreshData() async {
-    setState(() => _isRefreshing = true);
+    setState(() => isRefreshing = true);
 
     // Simulate Firestore sync
     await Future.delayed(const Duration(seconds: 2));
 
     setState(() {
-      _isRefreshing = false;
+      isRefreshing = false;
       _lastUpdate = DateTime.now();
       _isOffline = false; // Assume successful sync
     });
@@ -499,11 +507,13 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-                'Amount: \$${(transaction['amount'] as num).toStringAsFixed(2)}'),
+              'Amount: \$${(transaction['amount'] as num).toStringAsFixed(2)}',
+            ),
             Text('Category: ${transaction['category']}'),
             Text('Type: ${transaction['type']}'),
             Text(
-                'Date: ${_formatTransactionDate(transaction['date'] as DateTime)}'),
+              'Date: ${_formatTransactionDate(transaction['date'] as DateTime)}',
+            ),
           ],
         ),
         actions: [
